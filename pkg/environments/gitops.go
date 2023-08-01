@@ -191,6 +191,7 @@ Prs:
 		}
 
 		log.Logger().Tracef("done listing labels for PR %d", pr.Number)
+		pr.Labels = labels
 		
 		for _, label := range filterLabels {
 			if !scmhelpers.ContainsLabel(pr.Labels, label) {
