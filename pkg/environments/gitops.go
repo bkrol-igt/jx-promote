@@ -187,10 +187,10 @@ Prs:
 		}
 
 		for _, l := range labels {
-			fmt.Printf("label %s\n", l.Name)
+			log.Logger().Tracef("label %s\n", l.Name)
 		}
 
-		fmt.Printf("done listing labels for PR %d", pr.Number)
+		log.Logger().Tracef("done listing labels for PR %d", pr.Number)
 		
 		for _, label := range filterLabels {
 			if !scmhelpers.ContainsLabel(pr.Labels, label) {
