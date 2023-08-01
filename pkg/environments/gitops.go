@@ -180,6 +180,18 @@ Prs:
 		if pr.Closed || pr.Merged || pr.Base.Repo.FullName != repoFullName {
 			continue
 		}
+		
+		labels, _, err := scmClient.PullRequests.ListLabels(ctx, pr.Base.Repo.FullName, pr.Number, &scm.ListOptions{})
+		if err != nil {
+			return nil, errors.Wrapf(err, "failed to list labels on PR %d", pr.Number)
+		}
+
+		for _, l := range labels {
+			fmt.Printf("label %s\n", l.Name)
+		}
+
+		fmt.Printf("done listing labels for PR %d", pr.Number)
+		
 		for _, label := range filterLabels {
 			if !scmhelpers.ContainsLabel(pr.Labels, label) {
 				continue Prs
